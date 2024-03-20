@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Guild MVI Compose</string>
+    <string name="messgae_snack_bar">Hi This is SnackBar</string>
+    <string name="alert_title">Alert Title</string>
+    <string name="body_dialog">Hello From Other Side , Hii my Names is Ahmed</string>
+    <string name="cancel_button_dialog">Cancel</string>
+    <string name="done_button_dialog">Done</string>
+    <string name="enter_the_data">Enter the Data</string>
+    <string name="increase">Increase</string>
+    <string name="reset">Reset</string>
+    <string name="input_data">Take Data From Field</string>
+    <string name="show_dialog">Show Dialog</string>
+    <string name="show_snackBar">Show SnackBar</string>
+    <string name="the_data_is">My Data is : %d</string>
+    <string name="details_title_screen">Details</string>
+    <string name="home_title_screen">Home</string>
+    <string name="to_details">Open Details</string>
+</resources>
