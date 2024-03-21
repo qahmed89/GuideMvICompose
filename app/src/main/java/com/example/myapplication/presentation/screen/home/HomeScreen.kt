@@ -1,7 +1,5 @@
 package com.example.myapplication.presentation.screen.home
 
-import KeyStoreManager
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
@@ -24,14 +22,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.banquemisr.bm.tokenization.data.utils.CypherManager
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen(state: HomeState, navController: NavController,onIntent: (HomeIntent) -> Unit, effect: SharedFlow<HomeEffect>) {
+fun HomeScreen(
+    state: HomeState,
+    navController: NavController,
+    onIntent: (HomeIntent) -> Unit,
+    effect: SharedFlow<HomeEffect>
+) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -69,10 +70,6 @@ fun HomeScreen(state: HomeState, navController: NavController,onIntent: (HomeInt
                 .padding(padding),
             contentAlignment = Alignment.Center
         ) {
-            val cypherManager =KeyStoreManager()
-          val x=   cypherManager.encrypt(data = "hello W")
-            cypherManager.getPublicKeyAsString()
-            Log.i("TAGX",x)
             Column {
                 Button(onClick = { onIntent(HomeIntent.ClickOnEnableToastButton) }) {
                     Text(state.textEnableToastButton)
