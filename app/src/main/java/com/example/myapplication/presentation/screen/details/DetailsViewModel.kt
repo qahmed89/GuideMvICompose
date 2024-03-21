@@ -12,4 +12,38 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class DetailsViewModel()
+class DetailsViewModel() : BaseViewModel<DetailsState, DetailsIntent, DetailsEffect>() {
+    private val detailsState = MutableStateFlow(DetailsState())
+    private val detailsEffect = MutableSharedFlow<DetailsEffect>()
+    override val uiState: StateFlow<DetailsState>
+        get() = detailsState.asStateFlow()
+    override val uiEffect: SharedFlow<DetailsEffect>
+        get() = detailsEffect.asSharedFlow()
+
+    override fun onIntent(intent: DetailsIntent) {
+        when (intent) {
+            is DetailsIntent.ClickOnItemList -> {
+                emitEffectShowToastWithItemClicked(intent)
+            }
+
+            DetailsIntent.InitDetailsScreen -> {
+                updateStateWithDataFromUseCase()
+            }
+        }
+    }
+
+    private fun updateStateWithDataFromUseCase() {
+        viewModelScope.launch {
+            detailsState.update {
+                it.copy(isLoading = false, listData = GetDataUseCase().invoke())
+            }
+        }
+    }
+
+    private fun emitEffectShowToastWithItemClicked(intent: DetailsIntent.ClickOnItemList) {
+        viewModelScope.launch {
+            detailsEffect.emit(DetailsEffect.ShowToastWithItemClicked(intent.number))
+        }
+    }
+
+}
