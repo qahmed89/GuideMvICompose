@@ -40,7 +40,6 @@ class HomeViewModel() : BaseViewModel<HomeState, HomeIntent, HomeEffect>() {
 
     private fun emitEffectToShowSnackBarMessage(message:String) {
         viewModelScope.launch {
-            homeState.update { it.copy(isLoading = true) }
             homeEffect.emit(HomeEffect.ShowShowSnackBarMessage(message))
         }
     }
